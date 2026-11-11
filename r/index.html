@@ -3,7 +3,7 @@
 <main id="app"></main>
 <script>
 // iCloud public database (CloudKit Web Services). API tokens are read-only and meant to be public.
-const CK={production:{container:'iCloud.com.max.carnetderecettes',token:''},development:{container:'iCloud.com.max.carnetderecettes.dev',token:'7bda1c0ecc350190e6a3eceb598796fbf93f2a7989242fb612b59a9859cb342e'}};
+const CK={production:{container:'iCloud.com.max.carnetderecettes',token:'4149166e0d1444c080852ae21644f873a6d07fe89d89618cca7f820f2f5cefde'},development:{container:'iCloud.com.max.carnetderecettes.dev',token:'7bda1c0ecc350190e6a3eceb598796fbf93f2a7989242fb612b59a9859cb342e'}};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 async function fromLink(h){
   let z=h.startsWith('z.'); if(z)h=h.slice(2);
