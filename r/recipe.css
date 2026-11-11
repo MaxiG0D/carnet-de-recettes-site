@@ -37,11 +37,18 @@ footer{text-align:center;padding:36px 0 44px}
 footer a{display:inline-flex;align-items:center;gap:10px;color:var(--soft);text-decoration:none;font-size:14px;font-weight:500}
 footer img{width:28px;height:28px;border-radius:23%}
 @media(max-width:760px){main{padding:16px 14px 0}.body{grid-template-columns:1fr;gap:10px}.hero:not(.plain){aspect-ratio:4/3.2}.hero h1{padding:0 22px 22px}.stats div{padding:12px 16px}.card{padding:20px 20px 6px}}
-.top{position:absolute;left:0;right:0;top:36px;z-index:3;max-width:1360px;margin:0 auto;padding:0 40px;display:flex;justify-content:flex-end;pointer-events:none}
-.get{pointer-events:auto;display:inline-flex;align-items:center;gap:9px;padding:5px 15px 5px 5px;border-radius:999px;background:rgba(255,253,249,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#26201a;text-decoration:none;font-size:14px;font-weight:600;box-shadow:0 6px 18px rgba(20,12,6,.18);transition:transform .15s}
+body{display:flex;flex-direction:column;min-height:100vh}
+main{width:100%;padding-bottom:28px}
+.top{order:2;display:flex;justify-content:center;padding:0 20px 48px}
+.get{display:inline-flex;align-items:center;gap:9px;padding:5px 15px 5px 5px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;box-shadow:0 4px 14px rgba(60,40,20,.08);transition:transform .15s;white-space:nowrap}
 .get:hover{transform:translateY(-1px)}
 .get img{width:28px;height:28px;border-radius:23%}
-main{padding-bottom:48px}
-.hero:not(.plain){aspect-ratio:auto;height:clamp(240px,40vh,440px)}
-@media(min-width:1100px){.body{grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:40px}.ing.card{position:sticky;top:20px}}
-@media(max-width:760px){main{padding:14px 14px 0}.top{top:28px;padding:0 28px}.hero:not(.plain){height:auto;aspect-ratio:4/3.4}.get{font-size:13px}}
+.hero:not(.plain){aspect-ratio:auto;height:clamp(260px,52vh,560px)}
+@media(min-width:1100px){
+  :root{--w:min(1100px,calc(100vw - 500px))}
+  main{max-width:var(--w)}
+  .top{order:0;position:absolute;top:20px;left:calc(50% + var(--w)/2 + 4px);padding:0}
+  .body{grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:36px}
+  .ing.card{position:sticky;top:20px}
+}
+@media(max-width:760px){main{padding:14px 14px 0}.hero:not(.plain){height:auto;aspect-ratio:4/3.4}}
