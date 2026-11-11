@@ -1,2 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"><channel><title>Carnet de Recettes</title></channel></rss>
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Carnet de Recettes</title>
+        <item>
+            <title>1.0.2</title>
+            <pubDate>Wed, 11 Nov 2026 17:28:16 -0500</pubDate>
+            <sparkle:version>56</sparkle:version>
+            <sparkle:shortVersionString>1.0.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[
+# Mise à jour 1.0.2
+
+## Nouveautés
+
+- On vous partage une recette ? Ouvrez le lien : elle s’affiche directement dans Carnet, et vous pouvez l’ajouter à votre bibliothèque en un geste.
+- Si la recette est déjà dans une de vos bibliothèques, même partagée, le lien l’ouvre tout de suite.
+- Un seul menu « Partager » : envoyer le lien, copier le lien ou envoyer le PDF.
+- Un lien partagé est plus court et s’affiche avec le titre et la photo de la recette dans Messages.
+- Sans l’app, le lien ouvre une jolie page web de la recette, comme sa fiche PDF, avec un bouton pour télécharger Carnet.
+
+]]></description>
+            <enclosure url="https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-56/Carnet-de-Recettes.zip" length="15623359" type="application/octet-stream" sparkle:edSignature="qDiOyJYKfD75hXhbcyCEhfMgosjgnuBqsqLqOwJFylfu+pmGJdDrGtNGch4jeqSt2Rj3vd2pXGVqALAWKgyPDg=="/>
+        </item>
+    </channel>
+</rss>
