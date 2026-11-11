@@ -3,7 +3,7 @@
 <main id="app"></main>
 <script>
 // iCloud public database (CloudKit Web Services). API tokens are read-only and meant to be public.
-const CK={container:'iCloud.com.max.carnetderecettes',production:'',development:''};
+const CK={production:{container:'iCloud.com.max.carnetderecettes',token:''},development:{container:'iCloud.com.max.carnetderecettes.dev',token:''}};
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 async function fromLink(h){
   let z=h.startsWith('z.'); if(z)h=h.slice(2);
@@ -13,7 +13,7 @@ async function fromLink(h){
   return JSON.parse(new TextDecoder().decode(b));
 }
 async function fromICloud(id,env){
-  const res=await fetch(`https://api.apple-cloudkit.com/database/1/${CK.container}/${env}/public/records/lookup?ckAPIToken=${CK[env]}`,
+  const res=await fetch(`https://api.apple-cloudkit.com/database/1/${CK[env].container}/${env}/public/records/lookup?ckAPIToken=${CK[env].token}`,
     {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({records:[{recordName:id}]})});
   const rec=(await res.json()).records?.[0];
   if(!rec||!rec.fields)throw new Error('not found');
