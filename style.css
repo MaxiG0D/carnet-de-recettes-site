@@ -71,3 +71,5 @@ body.home main{flex:1;display:flex;flex-direction:column;align-items:center;padd
 body.home footer{position:relative;z-index:5;border:0;text-align:center;max-width:none;width:100%;padding:22px 0 26px;background:linear-gradient(transparent,var(--paper) 45%)}
 body.home footer a{color:var(--soft);text-decoration:none;font-size:14px;font-family:-apple-system,system-ui,sans-serif}
 @media(prefers-reduced-motion:reduce){.intro,.fiche{animation:none}}
+.recipe-hero.noimg{background:var(--card);border:1px solid var(--line)}
+.recipe-hero.noimg h1{position:static;color:var(--ink);background:none;padding:28px}

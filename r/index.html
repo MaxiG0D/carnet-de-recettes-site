@@ -15,7 +15,7 @@ async function decode(h){
   try{
     const r=await decode(location.hash.slice(1)); document.title=r.t;
     const meta=[r.time,r.por].filter(Boolean).join(' · ');
-    app.innerHTML=(r.img?`<div class="recipe-hero"><img src="${esc(r.img)}" alt=""><h1>${esc(r.t)}</h1></div>`:`<h1 class="page">${esc(r.t)}</h1>`)
+    app.innerHTML=(r.img?`<div class="recipe-hero"><img src="${esc(r.img)}" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><h1>${esc(r.t)}</h1></div>`:`<h1 class="page">${esc(r.t)}</h1>`)
      +(meta?`<p class="meta">${esc(meta)}</p>`:'')
      +`<div class="cta"><a class="btn" href="carnetderecettes://import${location.hash}">Ouvrir dans Carnet</a><a class="btn alt" href="../">Télécharger</a></div>`
      +`<div class="cols"><div><h2>Ingrédients</h2><ul>${(r.ing||[]).map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div><div><h2>Préparation</h2><ol class="steps">${(r.steps||[]).map(i=>`<li>${esc(i)}</li>`).join('')}</ol></div></div>`;
