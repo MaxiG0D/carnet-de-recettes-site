@@ -38,7 +38,7 @@ function list(lines, step) {
   return { html, n };
 }
 
-function page(env, r, url, imgURL) {
+function page(env, r, url, imgURL, id, dev) {
   const ing = list(r.ing), st = list(r.steps, true);
   const stats = [['prep', 'Préparation', r.prep], ['cook', 'Cuisson', r.cook], ['time', 'Total', r.time], ['por', 'Portions', r.por]].filter(x => x[2]);
   const desc = [r.time, r.por].filter(Boolean).join(' · ');
@@ -51,7 +51,7 @@ ${desc ? `<meta property="og:description" content="${esc(desc)}">` : ''}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=4"></head><body>
-<nav class="top"><a class="get" href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Télécharger Carnet</a></nav><main>
+<nav class="top" style="flex-wrap:wrap;gap:8px"><a class="get" href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Télécharger Carnet</a><a class="get" style="padding:5px 15px" href="carnetderecettes://shared?id=${esc(id)}${dev ? '&dev=1' : ''}">Ouvrir dans l’app</a></nav><main>
 <header class="hero${imgURL ? '' : ' plain'}">${imgURL ? `<img src="${esc(imgURL)}" alt="">` : ''}<h1>${esc(r.t)}</h1></header>
 ${stats.length ? `<div class="stats">${stats.map(([i, k, v]) => `<div>${ICON[i]}<span><small>${k}</small><strong>${esc(v)}</strong></span></div>`).join('')}</div>` : ''}
 <div class="body"><section class="ing card"><h2>Ingrédients</h2><p class="count">${ing.n} ingrédient${ing.n > 1 ? 's' : ''}</p><ul>${ing.html}</ul></section>
@@ -62,9 +62,22 @@ ${stats.length ? `<div class="stats">${stats.map(([i, k, v]) => `<div>${ICON[i]}
 const notFound = env => new Response(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recette introuvable</title><link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=4"></head><body><nav class="top"><a class="get" href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Télécharger Carnet</a></nav><main><header class="hero plain"><h1>Recette introuvable</h1></header></main></body></html>`,
   { status: 404, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
 
+// Universal Links: lets iOS and macOS open /r/<id> in the app when it is installed.
+// Release App ID, then the dev app's (Carnet Dev, bundle id ending in .rework).
+const AASA = JSON.stringify({
+  applinks: {
+    details: [{
+      appIDs: ['NZN9M2VV5J.com.max.carnetderecettes', 'NZN9M2VV5J.com.max.carnetderecettes.rework'],
+      components: [{ '/': '/r/*', comment: 'Shared recipes' }],
+    }],
+  },
+});
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
+    if (url.pathname === '/.well-known/apple-app-site-association')
+      return new Response(AASA, { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=3600' } });
     const m = url.pathname.match(/^\/r\/([A-Za-z0-9]{6,40})(\/photo\.jpg)?\/?$/);
     if (!m) return Response.redirect(env.SITE + '/', 302);
     const [, id, wantsPhoto] = m, dev = url.searchParams.has('dev');
@@ -86,7 +99,7 @@ export default {
       res = new Response(img.body, { headers: { 'Content-Type': img.headers.get('Content-Type') || 'image/jpeg', 'Cache-Control': 'public, max-age=604800' } });
     } else {
       const imgURL = (r.photo || r.source) ? `${url.origin}/r/${id}/photo.jpg${dev ? '?dev' : ''}` : null;
-      res = new Response(page(env, r, url.href, imgURL), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' } });
+      res = new Response(page(env, r, url.href, imgURL, id, dev), { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'public, max-age=300' } });
     }
     ctx.waitUntil(cache.put(request, res.clone()));
     return res;
