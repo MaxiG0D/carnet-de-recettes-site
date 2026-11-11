@@ -1,0 +1,42 @@
+:root{--paper:#f7f1e5;--card:#fffaf0;--ink:#2b2118;--soft:#7a6a5a;--line:#e4d9c6;--accent:#b4532e}
+@media(prefers-color-scheme:dark){:root{--paper:#1d1812;--card:#272018;--ink:#f1e8d8;--soft:#a69883;--line:#3a3126;--accent:#e0825a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 "Iowan Old Style","Palatino",Georgia,serif}
+a{color:inherit}
+header,main,footer{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding-top:22px;padding-bottom:22px}
+.brand{font-size:22px;font-weight:600;text-decoration:none}
+nav a{margin-left:22px;text-decoration:none;color:var(--soft);font-size:16px}
+nav a:hover{color:var(--accent)}
+.btn{display:inline-block;background:var(--accent);color:#fff;padding:13px 26px;border-radius:999px;text-decoration:none;font-weight:600;font-family:-apple-system,system-ui,sans-serif;font-size:16px}
+.btn.alt{background:none;color:var(--accent);border:1.5px solid var(--accent)}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;padding:36px 0 56px}
+.hero h1{font-size:clamp(38px,6vw,60px);line-height:1.05;margin:0 0 26px;font-weight:500}
+.hero .row{display:flex;gap:12px;flex-wrap:wrap}
+.hero img{width:100%;border-radius:22px;aspect-ratio:4/3;object-fit:cover;box-shadow:0 18px 40px rgba(60,40,20,.18)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;padding-bottom:64px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.card div{padding:14px 16px 16px}
+.card h3{margin:0 0 4px;font-size:18px;font-weight:500;line-height:1.25}
+.card small{color:var(--soft);font-family:-apple-system,system-ui,sans-serif}
+footer{padding-top:30px;padding-bottom:40px;color:var(--soft);font-size:15px;border-top:1px solid var(--line)}
+footer a{margin-right:18px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px;margin:10px 0 28px}
+h1.page{font-size:40px;font-weight:500;margin:20px 0}
+.panel h2{margin:0 0 6px;font-weight:500}
+.meta{color:var(--soft);font-family:-apple-system,system-ui,sans-serif;font-size:15px}
+ul.notes{padding-left:20px;margin:14px 0 0}
+.recipe-hero{position:relative;border-radius:22px;overflow:hidden;margin-top:6px}
+.recipe-hero img{width:100%;max-height:420px;object-fit:cover;display:block}
+.recipe-hero h1{position:absolute;inset:auto 0 0 0;margin:0;padding:80px 28px 24px;color:#fff;font-weight:500;font-size:clamp(30px,5vw,46px);line-height:1.1;background:linear-gradient(transparent,rgba(20,12,6,.78))}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:32px;margin:30px 0}
+.cols h2{font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-family:-apple-system,system-ui,sans-serif;margin:0 0 12px}
+.cols ul{list-style:none;padding:0;margin:0}
+.cols ul li{padding:9px 0;border-bottom:1px solid var(--line)}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 52px}
+ol.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;text-align:center;line-height:34px;font-size:16px}
+ol.steps li:not(:last-child):after{content:"";position:absolute;left:16.5px;top:38px;bottom:4px;width:1.5px;background:var(--line)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 40px}
+@media(max-width:720px){.hero,.cols{grid-template-columns:1fr}}

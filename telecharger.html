@@ -1,0 +1,9 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Télécharger</title><link rel="stylesheet" href="style.css"></head><body>
+<header><a class="brand" href="./">Carnet de Recettes</a><nav><a href="telecharger.html">Télécharger</a></nav></header>
+<main><h1 class="page">Télécharger</h1>
+<div class="panel"><h2>Carnet de Recettes pour Mac</h2><p class="meta" id="v">macOS 26 ou plus récent</p>
+<a class="btn" id="dl" href="https://github.com/MaxiG0D/carnet-de-recettes-site/releases/latest/download/Carnet-de-Recettes.zip">Télécharger</a>
+<ul class="notes" id="notes"></ul></div>
+</main>
+<script>fetch('releases.json').then(r=>r.json()).then(r=>{v.textContent='Version '+r.version+' · macOS 26 ou plus récent';notes.innerHTML=r.notes.map(n=>'<li>'+n+'</li>').join('')}).catch(()=>{})</script>
+<footer><a href="telecharger.html">Télécharger</a><a href="confidentialite.html">Confidentialité</a></footer></body></html>
