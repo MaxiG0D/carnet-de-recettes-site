@@ -19,10 +19,11 @@ async function fromICloud(id,env){
   if(!rec||!rec.fields)throw new Error('not found');
   const f=k=>rec.fields[k]?.value;
   const photo=f('photo')?.downloadURL?.replace('${f}','photo.jpg');
-  return {t:f('title'),time:f('time'),por:f('portions'),ing:f('ingredients'),steps:f('steps'),img:photo||f('source')};
+  return {t:f('title'),time:f('time'),por:f('portions'),prep:f('prep'),cook:f('cook'),ing:f('ingredients'),steps:f('steps'),img:photo||f('source')};
 }
 const ICON={
  prep:'<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>',
+ cook:'<svg viewBox="0 0 24 24"><path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.4 1.2-4 2.5-5 .2 1.6 1 2.6 2 3 .6-2.6.5-5.2.5-8z"/></svg>',
  time:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
  por:'<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.8c2 .7 3.2 2.4 3.5 5.2"/></svg>'};
 const isSection=l=>/^#\s*/.test(l)||(/^pour\b/i.test(l)&&!/\d/.test(l)&&l.length<60)||/:\s*$/.test(l);
@@ -38,7 +39,7 @@ function list(lines,step){
 function render(r){
   document.title=r.t||'Recette';
   const ing=list(r.ing),st=list(r.steps,true);
-  const stats=[['time','Total',r.time],['por','Portions',r.por]].filter(x=>x[2]);
+  const stats=[['prep','Préparation',r.prep],['cook','Cuisson',r.cook],['time','Total',r.time],['por','Portions',r.por]].filter(x=>x[2]);
   app.innerHTML=`<header class="hero${r.img?'':' plain'}">${r.img?`<img src="${esc(r.img)}" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('plain');this.remove()">`:''}<h1>${esc(r.t)}</h1></header>`
    +(stats.length?`<div class="stats">${stats.map(([i,k,v])=>`<div>${ICON[i]}<span><small>${k}</small><strong>${esc(v)}</strong></span></div>`).join('')}</div>`:'')
    +`<div class="body"><section class="ing card"><h2>Ingrédients</h2><p class="count">${ing.n} ingrédient${ing.n>1?'s':''}</p><ul>${ing.html}</ul></section>`
