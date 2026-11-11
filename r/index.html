@@ -1,6 +1,6 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Une recette de Carnet</title><meta property="og:title" content="Une recette de Carnet"><meta property="og:site_name" content="Carnet de Recettes"><meta property="og:image" content="https://maxig0d.github.io/carnet-de-recettes-site/icon.png"><meta property="og:type" content="article"><link rel="apple-touch-icon" href="../icon.png"><link rel="icon" href="../icon.png"><link rel="stylesheet" href="../style.css?v=3"></head><body>
-<header><a class="brand" href=".././">Carnet de Recettes</a></header>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Une recette de Carnet</title><meta property="og:title" content="Une recette de Carnet"><meta property="og:site_name" content="Carnet de Recettes"><meta property="og:image" content="https://maxig0d.github.io/carnet-de-recettes-site/icon.png"><meta property="og:type" content="article"><link rel="apple-touch-icon" href="../icon.png"><link rel="icon" href="../icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="recipe.css?v=1"></head><body>
 <main id="app"></main>
+<footer><a href="../"><img src="../icon.png" alt="">Carnet de Recettes</a></footer>
 <script>
 // iCloud public database (CloudKit Web Services). API tokens are read-only and meant to be public.
 const CK={production:{container:'iCloud.com.max.carnetderecettes',token:'4149166e0d1444c080852ae21644f873a6d07fe89d89618cca7f820f2f5cefde'},development:{container:'iCloud.com.max.carnetderecettes.dev',token:'7bda1c0ecc350190e6a3eceb598796fbf93f2a7989242fb612b59a9859cb342e'}};
@@ -21,18 +21,33 @@ async function fromICloud(id,env){
   const photo=f('photo')?.downloadURL?.replace('${f}','photo.jpg');
   return {t:f('title'),time:f('time'),por:f('portions'),ing:f('ingredients'),steps:f('steps'),img:photo||f('source')};
 }
+const ICON={
+ prep:'<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg>',
+ time:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+ por:'<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14.8c2 .7 3.2 2.4 3.5 5.2"/></svg>'};
+const isSection=l=>/^#\s*/.test(l)||(/^pour\b/i.test(l)&&!/\d/.test(l)&&l.length<60)||/:\s*$/.test(l);
+const clean=l=>l.replace(/^#\s*/,'').replace(/:\s*$/,'');
+function list(lines,step){
+  let n=0,out='';
+  for(const l of lines||[]){
+    if(isSection(l)){out+=`<li class="sec">${esc(clean(l))}</li>`;continue}
+    n++; out+=step?`<li><b>${n}</b><p>${esc(l)}</p></li>`:`<li>${esc(l)}</li>`;
+  }
+  return {html:out,n};
+}
 function render(r){
   document.title=r.t||'Recette';
-  const meta=[r.time,r.por].filter(Boolean).join(' · ');
-  app.innerHTML=(r.img?`<div class="recipe-hero"><img src="${esc(r.img)}" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('noimg');this.remove()"><h1>${esc(r.t)}</h1></div>`:`<h1 class="page">${esc(r.t)}</h1>`)
-   +(meta?`<p class="meta">${esc(meta)}</p>`:'')
-   +`<div class="cols"><div><h2>Ingrédients</h2><ul>${(r.ing||[]).map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div><div><h2>Préparation</h2><ol class="steps">${(r.steps||[]).map(i=>`<li>${esc(i)}</li>`).join('')}</ol></div></div>`
-   +`<div class="cta"><a class="btn" href="../">Télécharger Carnet de Recettes</a></div>`;
+  const ing=list(r.ing),st=list(r.steps,true);
+  const stats=[['time','Total',r.time],['por','Portions',r.por]].filter(x=>x[2]);
+  app.innerHTML=`<header class="hero${r.img?'':' plain'}">${r.img?`<img src="${esc(r.img)}" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('plain');this.remove()">`:''}<h1>${esc(r.t)}</h1></header>`
+   +(stats.length?`<div class="stats">${stats.map(([i,k,v])=>`<div>${ICON[i]}<span><small>${k}</small><strong>${esc(v)}</strong></span></div>`).join('')}</div>`:'')
+   +`<div class="body"><section class="ing card"><h2>Ingrédients</h2><p class="count">${ing.n} ingrédient${ing.n>1?'s':''}</p><ul>${ing.html}</ul></section>`
+   +`<section class="steps"><h2>Préparation</h2><p class="count">${st.n} étape${st.n>1?'s':''}</p><ol>${st.html}</ol></section></div>`;
 }
 (async()=>{
   const q=new URLSearchParams(location.search), id=[...q.keys()].find(k=>k!=='dev');
   try{ render(id?await fromICloud(id,q.has('dev')?'development':'production'):await fromLink(location.hash.slice(1))) }
-  catch(e){app.innerHTML='<h1 class="page">Recette introuvable</h1><div class="cta"><a class="btn" href="../">Carnet de Recettes</a></div>'}
+  catch(e){app.innerHTML='<header class="hero plain"><h1>Recette introuvable</h1></header>'}
 })();
 </script>
-<footer><a href="../confidentialite.html">Confidentialité</a></footer></body></html>
+</body></html>
