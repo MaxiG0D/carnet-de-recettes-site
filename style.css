@@ -40,3 +40,7 @@ ol.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:34px;
 ol.steps li:not(:last-child):after{content:"";position:absolute;left:16.5px;top:38px;bottom:4px;width:1.5px;background:var(--line)}
 .cta{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 40px}
 @media(max-width:720px){.hero,.cols{grid-template-columns:1fr}}
+body.home{min-height:100vh;display:flex;flex-direction:column}
+body.home main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px}
+.icon{width:168px;height:168px;border-radius:22.5%;box-shadow:0 14px 34px rgba(60,40,20,.22)}
+body.home footer{border:0;text-align:center;width:100%}

@@ -1,5 +1,5 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recette</title><link rel="stylesheet" href="../style.css"></head><body>
-<header><a class="brand" href=".././">Carnet de Recettes</a><nav><a href="../telecharger.html">Télécharger</a></nav></header>
+<header><a class="brand" href=".././">Carnet de Recettes</a></header>
 <main id="app"></main>
 <script>
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -17,9 +17,9 @@ async function decode(h){
     const meta=[r.time,r.por].filter(Boolean).join(' · ');
     app.innerHTML=(r.img?`<div class="recipe-hero"><img src="${esc(r.img)}" alt=""><h1>${esc(r.t)}</h1></div>`:`<h1 class="page">${esc(r.t)}</h1>`)
      +(meta?`<p class="meta">${esc(meta)}</p>`:'')
-     +`<div class="cta"><a class="btn" href="carnetderecettes://import${location.hash}">Ouvrir dans Carnet</a><a class="btn alt" href="../telecharger.html">Télécharger</a></div>`
+     +`<div class="cta"><a class="btn" href="carnetderecettes://import${location.hash}">Ouvrir dans Carnet</a><a class="btn alt" href="../">Télécharger</a></div>`
      +`<div class="cols"><div><h2>Ingrédients</h2><ul>${(r.ing||[]).map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div><div><h2>Préparation</h2><ol class="steps">${(r.steps||[]).map(i=>`<li>${esc(i)}</li>`).join('')}</ol></div></div>`;
   }catch(e){app.innerHTML='<h1 class="page">Lien invalide</h1>'}
 })();
 </script>
-<footer><a href="../telecharger.html">Télécharger</a><a href="../confidentialite.html">Confidentialité</a></footer></body></html>
+<footer><a href="../confidentialite.html">Confidentialité</a></footer></body></html>
