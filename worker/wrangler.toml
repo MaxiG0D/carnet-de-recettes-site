@@ -1,0 +1,11 @@
+name = "carnet-recettes"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+SITE = "https://maxig0d.github.io/carnet-de-recettes-site"
+PROD_CONTAINER = "iCloud.com.max.carnetderecettes"
+PROD_TOKEN = "4149166e0d1444c080852ae21644f873a6d07fe89d89618cca7f820f2f5cefde"
+DEV_CONTAINER = "iCloud.com.max.carnetderecettes.dev"
+DEV_TOKEN = "7bda1c0ecc350190e6a3eceb598796fbf93f2a7989242fb612b59a9859cb342e"
