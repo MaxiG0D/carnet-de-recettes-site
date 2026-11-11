@@ -50,15 +50,16 @@ ${desc ? `<meta property="og:description" content="${esc(desc)}">` : ''}
 <link rel="icon" href="${env.SITE}/icon.png"><link rel="apple-touch-icon" href="${env.SITE}/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=1"></head><body><main>
+<link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=2"></head><body>
+<nav class="top"><a class="get" href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Télécharger Carnet</a></nav><main>
 <header class="hero${imgURL ? '' : ' plain'}">${imgURL ? `<img src="${esc(imgURL)}" alt="">` : ''}<h1>${esc(r.t)}</h1></header>
 ${stats.length ? `<div class="stats">${stats.map(([i, k, v]) => `<div>${ICON[i]}<span><small>${k}</small><strong>${esc(v)}</strong></span></div>`).join('')}</div>` : ''}
 <div class="body"><section class="ing card"><h2>Ingrédients</h2><p class="count">${ing.n} ingrédient${ing.n > 1 ? 's' : ''}</p><ul>${ing.html}</ul></section>
 <section class="steps"><h2>Préparation</h2><p class="count">${st.n} étape${st.n > 1 ? 's' : ''}</p><ol>${st.html}</ol></section></div>
-</main><footer><a href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Carnet de Recettes</a></footer></body></html>`;
+</main></body></html>`;
 }
 
-const notFound = env => new Response(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recette introuvable</title><link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=1"></head><body><main><header class="hero plain"><h1>Recette introuvable</h1></header></main><footer><a href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Carnet de Recettes</a></footer></body></html>`,
+const notFound = env => new Response(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recette introuvable</title><link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=2"></head><body><nav class="top"><a class="get" href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Télécharger Carnet</a></nav><main><header class="hero plain"><h1>Recette introuvable</h1></header></main></body></html>`,
   { status: 404, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
 
 export default {
