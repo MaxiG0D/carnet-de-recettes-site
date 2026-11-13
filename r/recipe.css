@@ -41,13 +41,18 @@ body{display:flex;flex-direction:column;min-height:100vh}
 main{width:100%;padding-bottom:28px}
 .top{order:2;display:flex;justify-content:center;padding:0 20px 48px}
 .get{display:inline-flex;align-items:center;gap:9px;padding:5px 15px 5px 5px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--ink);text-decoration:none;font-size:14px;font-weight:600;box-shadow:0 4px 14px rgba(60,40,20,.08);transition:transform .15s;white-space:nowrap}
+.top{flex-direction:column;align-items:center;gap:10px}
+.top .row{display:flex;gap:10px;align-items:center}
+.get{min-height:40px}.get.open{padding:0 18px}.get.dl{padding:0 18px}.top .row{flex-wrap:wrap;justify-content:center}
 .get:hover{transform:translateY(-1px)}
 .get img{width:28px;height:28px;border-radius:23%}
 .hero:not(.plain){aspect-ratio:auto;height:clamp(260px,52vh,560px)}
 @media(min-width:1100px){
   :root{--w:min(1100px,calc(100vw - 500px))}
   main{max-width:var(--w)}
-  .top{order:0;position:absolute;top:20px;left:calc(50% + var(--w)/2 + 4px);padding:0}
+  .top{order:0;position:absolute;top:20px;left:calc(50% + var(--w)/2 + 4px);padding:0;align-items:stretch}
+  .top .row{flex-direction:column;align-items:stretch}
+  .top .get{justify-content:flex-start}
   .body{grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:36px}
   .ing.card{position:sticky;top:20px}
 }

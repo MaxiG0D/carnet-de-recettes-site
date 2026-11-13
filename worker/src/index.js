@@ -18,6 +18,7 @@ async function lookup(env, id, dev) {
     t: f('title'), time: f('time'), prep: f('prep'), cook: f('cook'), por: f('portions'),
     ing: f('ingredients') || [], steps: f('steps') || [],
     photo: f('photo')?.downloadURL?.replace('${f}', 'photo.jpg'), source: f('source'),
+    pdf: f('pdf')?.downloadURL?.replace('${f}', 'fiche.pdf'),
   };
 }
 
@@ -50,8 +51,8 @@ ${desc ? `<meta property="og:description" content="${esc(desc)}">` : ''}
 <link rel="icon" href="${env.SITE}/icon.png"><link rel="apple-touch-icon" href="${env.SITE}/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=4"></head><body>
-<nav class="top" style="flex-wrap:wrap;gap:8px"><a class="get" href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Télécharger Carnet</a><a class="get" style="padding:5px 15px" href="carnetderecettes://shared?id=${esc(id)}${dev ? '&dev=1' : ''}">Ouvrir dans l’app</a></nav><main>
+<link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=6"></head><body>
+<nav class="top"><a class="get" href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Télécharger Carnet</a><div class="row"><a class="get open" href="carnetderecettes://shared?id=${esc(id)}${dev ? '&dev=1' : ''}">Ouvrir dans l’app</a>${r.pdf ? `<a class="get dl" href="${esc(url.replace(/[?#].*$/, '').replace(/\/$/, ''))}/fiche.pdf${dev ? '?dev' : ''}" download aria-label="Enregistrer en PDF" title="Enregistrer en PDF"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 11 12 15.5 16.5 11M5 19.5h14"/></svg>Enregistrer en PDF</a>` : ''}</div></nav><main>
 <header class="hero${imgURL ? '' : ' plain'}">${imgURL ? `<img src="${esc(imgURL)}" alt="">` : ''}<h1>${esc(r.t)}</h1></header>
 ${stats.length ? `<div class="stats">${stats.map(([i, k, v]) => `<div>${ICON[i]}<span><small>${k}</small><strong>${esc(v)}</strong></span></div>`).join('')}</div>` : ''}
 <div class="body"><section class="ing card"><h2>Ingrédients</h2><p class="count">${ing.n} ingrédient${ing.n > 1 ? 's' : ''}</p><ul>${ing.html}</ul></section>
@@ -59,7 +60,7 @@ ${stats.length ? `<div class="stats">${stats.map(([i, k, v]) => `<div>${ICON[i]}
 </main></body></html>`;
 }
 
-const notFound = env => new Response(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recette introuvable</title><link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=4"></head><body><nav class="top"><a class="get" href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Télécharger Carnet</a></nav><main><header class="hero plain"><h1>Recette introuvable</h1></header></main></body></html>`,
+const notFound = env => new Response(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recette introuvable</title><link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=6"></head><body><nav class="top"><a class="get" href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Télécharger Carnet</a></nav><main><header class="hero plain"><h1>Recette introuvable</h1></header></main></body></html>`,
   { status: 404, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
 
 // Universal Links: lets iOS and macOS open /r/<id> in the app when it is installed.
@@ -78,7 +79,7 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === '/.well-known/apple-app-site-association')
       return new Response(AASA, { headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=3600' } });
-    const m = url.pathname.match(/^\/r\/([A-Za-z0-9]{6,40})(\/photo\.jpg)?\/?$/);
+    const m = url.pathname.match(/^\/r\/([A-Za-z0-9]{6,40})(\/photo\.jpg|\/fiche\.pdf)?\/?$/);
     if (!m) return Response.redirect(env.SITE + '/', 302);
     const [, id, wantsPhoto] = m, dev = url.searchParams.has('dev');
 
@@ -90,7 +91,15 @@ export default {
     if (!r) return notFound(env);
 
     let res;
-    if (wantsPhoto) {
+    if (wantsPhoto === '/fiche.pdf') {
+      if (!r.pdf) return new Response('', { status: 404 });
+      const file = await fetch(r.pdf);
+      if (!file.ok) return new Response('', { status: 404 });
+      const name = (r.t || 'recette').replace(/[\\/:*?"<>|]+/g, ' ').trim() || 'recette';
+      res = new Response(file.body, { headers: { 'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="fiche.pdf"; filename*=UTF-8''${encodeURIComponent(name)}.pdf`,
+        'Cache-Control': 'public, max-age=3600' } });
+    } else if (wantsPhoto) {
       // CloudKit asset URLs expire, so the photo is proxied through a stable address.
       const src = r.photo || r.source;
       if (!src) return new Response('', { status: 404 });
