@@ -51,8 +51,8 @@ ${desc ? `<meta property="og:description" content="${esc(desc)}">` : ''}
 <link rel="icon" href="${env.SITE}/icon.png"><link rel="apple-touch-icon" href="${env.SITE}/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=6"></head><body>
-<nav class="top"><a class="get" href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Télécharger Carnet</a><div class="row"><a class="get open" href="carnetderecettes://shared?id=${esc(id)}${dev ? '&dev=1' : ''}">Ouvrir dans l’app</a>${r.pdf ? `<a class="get dl" href="${esc(url.replace(/[?#].*$/, '').replace(/\/$/, ''))}/fiche.pdf${dev ? '?dev' : ''}" download aria-label="Enregistrer en PDF" title="Enregistrer en PDF"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 11 12 15.5 16.5 11M5 19.5h14"/></svg>Enregistrer en PDF</a>` : ''}</div></nav><main>
+<link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=7"></head><body>
+<nav class="top"><a class="act open" href="carnetderecettes://shared?id=${esc(id)}${dev ? '&dev=1' : ''}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-8.5 8.5M18 14v4.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 4 18.5v-11A1.5 1.5 0 0 1 5.5 6H10"/></svg>Ouvrir dans l’app</a>${r.pdf ? `<a class="act" href="${esc(url.replace(/[?#].*$/, '').replace(/\/$/, ''))}/fiche.pdf${dev ? '?dev' : ''}" download><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11M7.5 11 12 15.5 16.5 11M5 19.5h14"/></svg>Enregistrer en PDF</a>` : ''}</nav><main>
 <header class="hero${imgURL ? '' : ' plain'}">${imgURL ? `<img src="${esc(imgURL)}" alt="">` : ''}<h1>${esc(r.t)}</h1></header>
 ${stats.length ? `<div class="stats">${stats.map(([i, k, v]) => `<div>${ICON[i]}<span><small>${k}</small><strong>${esc(v)}</strong></span></div>`).join('')}</div>` : ''}
 <div class="body"><section class="ing card"><h2>Ingrédients</h2><p class="count">${ing.n} ingrédient${ing.n > 1 ? 's' : ''}</p><ul>${ing.html}</ul></section>
@@ -60,7 +60,7 @@ ${stats.length ? `<div class="stats">${stats.map(([i, k, v]) => `<div>${ICON[i]}
 </main></body></html>`;
 }
 
-const notFound = env => new Response(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recette introuvable</title><link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=6"></head><body><nav class="top"><a class="get" href="${env.SITE}/"><img src="${env.SITE}/icon.png" alt="">Télécharger Carnet</a></nav><main><header class="hero plain"><h1>Recette introuvable</h1></header></main></body></html>`,
+const notFound = env => new Response(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recette introuvable</title><link rel="stylesheet" href="${env.SITE}/r/recipe.css?v=7"></head><body><main><header class="hero plain"><h1>Recette introuvable</h1></header></main></body></html>`,
   { status: 404, headers: { 'Content-Type': 'text/html; charset=utf-8' } });
 
 // Universal Links: lets iOS and macOS open /r/<id> in the app when it is installed.
