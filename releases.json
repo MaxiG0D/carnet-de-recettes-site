@@ -1,12 +1,10 @@
 {
  "version": "1.0.2",
- "build": 56,
- "zip": "https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-56/Carnet-de-Recettes.zip",
+ "build": 57,
+ "zip": "https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-57/Carnet-de-Recettes.zip",
  "notes": [
-  "On vous partage une recette ? Ouvrez le lien : elle s’affiche directement dans Carnet, et vous pouvez l’ajouter à votre bibliothèque en un geste.",
-  "Si la recette est déjà dans une de vos bibliothèques, même partagée, le lien l’ouvre tout de suite.",
-  "Un seul menu « Partager » : envoyer le lien, copier le lien ou envoyer le PDF.",
-  "Un lien partagé est plus court et s’affiche avec le titre et la photo de la recette dans Messages.",
-  "Sans l’app, le lien ouvre une jolie page web de la recette, comme sa fiche PDF, avec un bouton pour télécharger Carnet."
+  "Nouvel onglet « Semaine » : planifiez vos soupers et gardez la liste d’épicerie au même endroit.",
+  "Support Initial pour les Cocktails!",
+  "En cuisinant, la liste « Pour cette étape » trouve mieux les bons ingrédients."
  ]
 }
