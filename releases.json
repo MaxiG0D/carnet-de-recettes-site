@@ -1,14 +1,9 @@
 {
  "version": "1.0.2",
- "build": 58,
- "zip": "https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-58/Carnet-de-Recettes.zip",
+ "build": 59,
+ "zip": "https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-59/Carnet-de-Recettes.zip",
  "notes": [
-  "Les minuteries comprennent les durées en anglais, comme « 15-20 mins » ou « 1 hr ».",
-  "Pour une durée comme « 15 à 20 minutes », l'app demande laquelle choisir.",
-  "Nouveau bouton « −1 min » sur les minuteries, à côté de « +1 min ».",
-  "En cuisine, chaque ingrédient s'affiche seulement à la première étape qui l'utilise.",
-  "« Pour cette étape » reconnaît mieux les ingrédients, comme l'huile d'olive extra vierge.",
-  "Plus de recettes de sites en anglais s'importent bien, dont celles aux étapes dépliables.",
-  "L'épicerie n'affiche plus « Facultatif » ni « Ajouter à ma liste » comme ingrédients."
+  "Une recette dans une autre langue peut se lire traduite, avec le bouton de traduction.",
+  "Sur l’écran verrouillé, la minuterie permet maintenant d’enlever une minute, en plus d’en ajouter."
  ]
 }

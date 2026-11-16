@@ -4,8 +4,8 @@
         <title>Carnet de Recettes</title>
         <item>
             <title>1.0.2</title>
-            <pubDate>Sat, 14 Nov 2026 18:55:45 -0500</pubDate>
-            <sparkle:version>58</sparkle:version>
+            <pubDate>Mon, 16 Nov 2026 08:18:31 -0500</pubDate>
+            <sparkle:version>59</sparkle:version>
             <sparkle:shortVersionString>1.0.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
             <description sparkle:format="markdown"><![CDATA[
@@ -13,15 +13,10 @@
 
 ## Nouveautés
 
-- Les minuteries comprennent les durées en anglais, comme « 15-20 mins » ou « 1 hr ».
-- Pour une durée comme « 15 à 20 minutes », l'app demande laquelle choisir.
-- Nouveau bouton « −1 min » sur les minuteries, à côté de « +1 min ».
-- En cuisine, chaque ingrédient s'affiche seulement à la première étape qui l'utilise.
-- « Pour cette étape » reconnaît mieux les ingrédients, comme l'huile d'olive extra vierge.
-- Plus de recettes de sites en anglais s'importent bien, dont celles aux étapes dépliables.
-- L'épicerie n'affiche plus « Facultatif » ni « Ajouter à ma liste » comme ingrédients.
+- Une recette dans une autre langue peut se lire traduite, avec le bouton de traduction.
+- Sur l’écran verrouillé, la minuterie permet maintenant d’enlever une minute, en plus d’en ajouter.
 ]]></description>
-            <enclosure url="https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-58/Carnet-de-Recettes.zip" length="16085404" type="application/octet-stream" sparkle:edSignature="2n6EnOeaFj3PGlL0j4hOKNp8VhNjGllxU+W70e2UnZQ6glZvjd42H3MYEAMX2ufWzERQJRKNuR9MOq8dIcXRDw=="/>
+            <enclosure url="https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-59/Carnet-de-Recettes.zip" length="16232245" type="application/octet-stream" sparkle:edSignature="V2gfk3X1Ie+I8vSGESAXesZG8CsyKvtpSi7xfpXso5OddvMa44omyJTd/a8RCTs1s5N4iW8MakFNhafEmKvsDg=="/>
         </item>
     </channel>
 </rss>
