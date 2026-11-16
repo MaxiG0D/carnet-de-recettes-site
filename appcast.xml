@@ -4,8 +4,8 @@
         <title>Carnet de Recettes</title>
         <item>
             <title>1.0.2</title>
-            <pubDate>Mon, 16 Nov 2026 16:43:14 -0500</pubDate>
-            <sparkle:version>60</sparkle:version>
+            <pubDate>Mon, 16 Nov 2026 17:07:09 -0500</pubDate>
+            <sparkle:version>61</sparkle:version>
             <sparkle:shortVersionString>1.0.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
             <description sparkle:format="markdown"><![CDATA[
@@ -13,10 +13,10 @@
 
 ## Nouveautés
 
-- La semaine partagée se met à jour en quelques secondes entre deux personnes, et indique avec qui elle est partagée.
+- Correction : choisir une autre bibliothèque pour la semaine ne mélange plus les repas de deux familles.
 
 ]]></description>
-            <enclosure url="https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-60/Carnet-de-Recettes.zip" length="16288442" type="application/octet-stream" sparkle:edSignature="lE7XYZc5stgEJFY9c4+iNV2wwQc44jpRmaf86SkyS/QMnCeNBUX0u8PLNR4Ik8aQk/rk4p59cMmSN5ItwVW2CQ=="/>
+            <enclosure url="https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-61/Carnet-de-Recettes.zip" length="16295697" type="application/octet-stream" sparkle:edSignature="j5IKcHmqeqG/vn4LDT5iXNiYW33KeZwHkftgosaACa3RZ1/+wYGZzXG19TCXXZvGMl685I/rnnQRe3x8YWbCAQ=="/>
         </item>
     </channel>
 </rss>

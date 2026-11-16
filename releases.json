@@ -1,8 +1,8 @@
 {
  "version": "1.0.2",
- "build": 60,
- "zip": "https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-60/Carnet-de-Recettes.zip",
+ "build": 61,
+ "zip": "https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-61/Carnet-de-Recettes.zip",
  "notes": [
-  "La semaine partagée se met à jour en quelques secondes entre deux personnes, et indique avec qui elle est partagée."
+  "Correction : choisir une autre bibliothèque pour la semaine ne mélange plus les repas de deux familles."
  ]
 }
