@@ -4,8 +4,8 @@
         <title>Carnet de Recettes</title>
         <item>
             <title>1.0.2</title>
-            <pubDate>Mon, 16 Nov 2026 08:18:31 -0500</pubDate>
-            <sparkle:version>59</sparkle:version>
+            <pubDate>Mon, 16 Nov 2026 16:43:14 -0500</pubDate>
+            <sparkle:version>60</sparkle:version>
             <sparkle:shortVersionString>1.0.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
             <description sparkle:format="markdown"><![CDATA[
@@ -13,10 +13,10 @@
 
 ## Nouveautés
 
-- Une recette dans une autre langue peut se lire traduite, avec le bouton de traduction.
-- Sur l’écran verrouillé, la minuterie permet maintenant d’enlever une minute, en plus d’en ajouter.
+- La semaine partagée se met à jour en quelques secondes entre deux personnes, et indique avec qui elle est partagée.
+
 ]]></description>
-            <enclosure url="https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-59/Carnet-de-Recettes.zip" length="16232245" type="application/octet-stream" sparkle:edSignature="V2gfk3X1Ie+I8vSGESAXesZG8CsyKvtpSi7xfpXso5OddvMa44omyJTd/a8RCTs1s5N4iW8MakFNhafEmKvsDg=="/>
+            <enclosure url="https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-60/Carnet-de-Recettes.zip" length="16288442" type="application/octet-stream" sparkle:edSignature="lE7XYZc5stgEJFY9c4+iNV2wwQc44jpRmaf86SkyS/QMnCeNBUX0u8PLNR4Ik8aQk/rk4p59cMmSN5ItwVW2CQ=="/>
         </item>
     </channel>
 </rss>

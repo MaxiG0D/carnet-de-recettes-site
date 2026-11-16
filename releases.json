@@ -1,9 +1,8 @@
 {
  "version": "1.0.2",
- "build": 59,
- "zip": "https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-59/Carnet-de-Recettes.zip",
+ "build": 60,
+ "zip": "https://github.com/MaxiG0D/carnet-de-recettes-site/releases/download/mac-1.0.2-60/Carnet-de-Recettes.zip",
  "notes": [
-  "Une recette dans une autre langue peut se lire traduite, avec le bouton de traduction.",
-  "Sur l’écran verrouillé, la minuterie permet maintenant d’enlever une minute, en plus d’en ajouter."
+  "La semaine partagée se met à jour en quelques secondes entre deux personnes, et indique avec qui elle est partagée."
  ]
 }
